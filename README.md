@@ -28,18 +28,26 @@ Most AI PMs have never operated inside these constraints. I have shipped there f
 
 ---
 
-## Artifacts — Work in Progress
+## Artifacts — Built in Public
 
 | # | Artifact | Status | Link |
 |---|----------|--------|------|
 | 1 | Failure Autopsy Memo — PAF OAS | ✅ Complete | [View](artifacts/day1-failure-autopsy.md) |
 | 2 | Positioning Statement v1 | ✅ Complete | [View](artifacts/day1-positioning-statement.md) |
-| 3 | Customer Discovery Framework — HRMS RAG | 🔄 In progress | — |
-| 4 | Full PRD — Enterprise HRMS Copilot | 🔄 Upcoming | — |
+| 3 | Discovery Document — HRMS RAG Chatbot | ✅ Complete | [View](artifacts/day2-discovery-document-hrms-rag.md) |
+| 4 | Full PRD — Enterprise HRMS Copilot | 🔄 In Progress | — |
 | 5 | AI Product Eval Harness (open source) | 🔄 Upcoming | — |
 | 6 | Enterprise AI Readiness Scorecard | 🔄 Upcoming | — |
 | 7 | AI Unit Economics Model | 🔄 Upcoming | — |
 | 8 | Sovereign AI Strategy Memo | 🔄 Upcoming | — |
+
+---
+
+## Published Writing
+
+| # | Title | Platform | Date |
+|---|-------|----------|------|
+| 1 | A RAG system is only as good as its data | LinkedIn | Jul 2026 |
 
 ---
 
