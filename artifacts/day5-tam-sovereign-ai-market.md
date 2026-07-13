@@ -2,7 +2,17 @@
 ## Sovereign and On-Premises Enterprise AI Market
 **Author:** Irtaqa Naveed, Senior AI Product Manager
 **Date:** July 2026
-**Method:** Bottoms-up unit economics, not top-down percentage of large market report
+**Method:** Bottoms-up unit economics, contextualized against top-down analyst estimates
+
+---
+
+## MARKET CONTEXT: TOP-DOWN VS BOTTOMS-UP
+
+Industry analysts size the broader sovereign AI infrastructure market at $20 billion to $79 billion globally today, with projections toward $600 billion by 2030. This figure encompasses territorial compute infrastructure, in-country cloud hosting, localized regulatory software, national AI programs, and hardware investment.
+
+Our bottoms-up model sizes a specific subset of that market: the sovereign AI software and deployment services layer that regulated enterprises actually purchase to run AI on their own infrastructure. This is the serviceable addressable market (SAM) within the broader TAM.
+
+A Senior PM knows both numbers and knows the difference between them.
 
 ---
 
@@ -35,7 +45,7 @@ These organizations are conservative, non-flexible, and slow to adapt. Procureme
 
 **Estimated 3-year adoption rate: 10%**
 
-This is optimistic given the institutional inertia but justified by three accelerating forces in 2026. First, the Fable 5 export control incident in June 2026 forced board-level conversations about API dependency risk at regulated enterprises globally. Second, EU AI Act high-risk obligations are now fully enforceable, creating mandatory compliance timelines that cannot be deferred. Third, sovereign AI has become a national priority in GCC, South Asia, and Southeast Asia markets with dedicated government funding.
+This is justified by three accelerating forces in 2026. First, the Fable 5 export control incident in June 2026 forced board-level conversations about API dependency risk at regulated enterprises globally. Second, EU AI Act high-risk obligations are now fully enforceable, creating mandatory compliance timelines that cannot be deferred. Third, sovereign AI has become a national priority in GCC, South Asia, and Southeast Asia markets with dedicated government funding.
 
 **3-year addressable buyers: 63,000 x 10% = 6,300 organizations**
 
@@ -60,23 +70,19 @@ Rounded to $400,000 for conservative modeling including upsell and expansion rev
 
 ---
 
-## STEP 4: TAM CALCULATION
+## STEP 4: BOTTOMS-UP SAM CALCULATION
 
-TAM = Total 3-year buyers x Average Annual Contract Value
+SAM = Total 3-year buyers x Average Annual Contract Value
 
-TAM = 6,300 x $400,000
+SAM = 6,300 x $400,000
 
-**TAM = $2.52 billion per year**
+**Bottoms-up SAM = $2.52 billion per year**
 
 ---
 
-## MARKET CONTEXT
+## HOW TO USE BOTH NUMBERS IN CONVERSATION
 
-This $2.5 billion TAM is specifically the sovereign and on-premises enterprise AI segment. It does not include the broader cloud AI market.
-
-This segment is growing faster than the cloud AI market in 2026 for three reasons. The Fable 5 export control crisis demonstrated that cloud API dependency is a geopolitical risk, not just a compliance preference. EU AI Act enforcement has created hard deadlines that procurement teams can no longer defer. And GCC sovereign AI programs including HUMAIN in Saudi Arabia and G42 in UAE are driving billions in national infrastructure investment that requires on-premises AI capability.
-
-Most AI PMs and most AI companies are competing for the cloud AI market. The sovereign and on-premises segment is underserved, growing fast, and requires a specific background to credibly serve. That background is what I bring.
+"The broader sovereign AI infrastructure market is estimated at $20 to $79 billion today, scaling toward $600 billion by 2030 according to industry analysts. That figure includes hardware, data centers, national compute programs, and the full sovereign AI stack. Within that, the specific segment I focus on — sovereign AI software and deployment services for regulated enterprises — represents approximately $2.5 billion annually based on my bottoms-up model of 6,300 addressable buyers at an average contract value of $400,000. That is the serviceable segment where a focused product company can compete and win today."
 
 ---
 
@@ -87,10 +93,12 @@ Most AI PMs and most AI companies are competing for the cloud AI market. The sov
 | Total addressable organizations | 63,000 | 40,000 | 100,000 |
 | 3-year adoption rate | 10% | 5% | 20% |
 | Average contract value | $400,000 | $200,000 | $600,000 |
-| TAM result | $2.52B | $400M | $12B |
+| SAM result | $2.52B | $400M | $12B |
 
-Even in the bear case, a $400 million market with high barriers to entry and low competition is a compelling opportunity. In the bull case, accelerated by regulatory tailwinds and sovereign AI investment, this segment approaches $12 billion.
+Even in the bear case, a $400 million serviceable market with high barriers to entry and low competition is a compelling opportunity. In the bull case, accelerated by regulatory tailwinds and sovereign AI investment, this segment approaches $12 billion annually.
+
+The broader $79 billion to $600 billion market provides the infrastructure tailwind that makes the software layer opportunity real and growing.
 
 ---
 
-*This model was built as part of a Senior AI PM portfolio development program. All estimates are bottoms-up reasoning from first principles and are intended to demonstrate market sizing methodology, not to represent investment advice.*
+*This model was built as part of a Senior AI PM portfolio development program. All estimates are bottoms-up reasoning from first principles contextualized against publicly available analyst projections. This is not investment advice.*
