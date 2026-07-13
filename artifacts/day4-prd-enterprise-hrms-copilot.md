@@ -1,177 +1,160 @@
 # PRODUCT REQUIREMENTS DOCUMENT
-## Enterprise HRMS Copilot — Natural Language HR Intelligence
+## Enterprise HRMS Copilot — Natural Language HR Intelligence for Executive Decision-Making
 
 **Author:** Irtaqa Naveed, Senior AI Product Manager
 **Status:** Draft v1.0
 **Date:** July 2026
-**Classification:** Portfolio artifact — based on real domain experience, greenfielded as pre-build discovery
+**Classification:** Portfolio artifact — based on real product experience at One Network
 
 ---
 
 ## 1. PROBLEM STATEMENT
 
-One Network's executive layer — CEO and senior leadership — had zero real-time visibility into their 5,000-person workforce. HR data existed in structured databases and policy documents but was inaccessible without technical support or scheduled reporting cycles.
+One Network's executive team manages a 5,000-person workforce across multiple locations. Before this product, HR intelligence was delivered through weekly Excel-based presentations prepared by department heads. This process had three critical failure points.
 
-The existing process: department heads prepared weekly Excel presentations covering attendance, performance, financial, and scheduling data. These presentations were prepared manually, were often outdated by the time they were reviewed, and could not support ad-hoc questions. If the CEO needed to know which employees were underperforming, or when a specific person last transferred stations, the answer required a human to extract it — taking hours or days.
+First, it was slow. Data was always at least a week old by the time it reached the CEO. Decisions about rotation, transfers, and performance were made on stale information.
 
-This created three real business problems. First, executive decisions about staffing, rotation, and performance were made on stale data. Second, scheduling gaps at financial checkpoints — such as toll plaza rotation — created conditions for cash manipulation and fraud. Third, individual unavailability (leave, travel) caused the entire reporting cycle to pause, leaving the organization operationally blind.
+Second, it was fragile. If a department head or the CEO was unavailable, the entire reporting cycle paused. Rotation scheduling delays created financial risk — staff remaining at one location too long created conditions for cash manipulation at toll plazas.
+
+Third, it was shallow. Executives could only ask questions that fit the prepared report format. Ad-hoc questions — "who are my ten lowest performers in the HR team right now?" — required a new manual pull, taking hours or days.
 
 ---
 
 ## 2. GOAL
 
-Enable any authorized executive to query live HR data in natural language and receive accurate, sourced answers in real time — without scheduling a meeting, waiting for a report, or involving a human intermediary.
-
-**North Star Metric:** Time from executive question to accurate answer, measured from days or hours to under 60 seconds.
+Enable any authorized executive to ask any HR question in natural language and receive an accurate, real-time answer from live enterprise data — without scheduling a meeting, waiting for a report, or involving any other person.
 
 ---
 
 ## 3. NON-GOALS
 
-These are explicitly out of scope for this version. They are not future maybes — they are decisions not to build.
+These are explicitly out of scope for v1. They will not be built, prototyped, or discussed as stretch goals.
 
-- This product does not allow executives to write or update HR records. Read-only access only.
-- This product does not support employee-facing queries. The interface is for the executive layer only.
-- This product does not generate reports or scheduled summaries. It answers questions on demand.
-- This product does not integrate with external systems or cloud APIs. All data stays on-premises.
-- This product does not support voice input in v1. Text only.
-- This product does not make decisions. It surfaces data. All decisions remain with the executive.
-
----
-
-## 4. USER PERSONAS
-
-**Primary User: The CEO**
-Needs immediate, accurate answers to workforce questions without involving staff. Has limited patience for complex interfaces. Asks questions in natural language the way they would ask a human assistant. Does not know or care about the underlying database schema.
-
-Example questions the CEO actually asks:
-- When did X join the company?
-- When was Y last transferred from their station?
-- Who are the 10 lowest performing employees in the HR team?
-- Who has been the best performer over the past 6 months?
-- Which employees are currently underpaid relative to their grade?
-- Is Z going on leave next month and what category?
-
-**Secondary User: Senior Executives and Department Heads**
-Same query needs as the CEO but scoped to their own department. Need visibility into attendance, performance, and scheduling without waiting for weekly reports.
+- Self-service access for non-executive employees
+- HR data entry or editing through the copilot interface
+- Integration with external HR benchmarking data
+- Predictive analytics or forecasting
+- Mobile application
+- Any cloud-based deployment or external API calls
+- Automated decision-making — the copilot surfaces information only, humans make all decisions
 
 ---
 
-## 5. USE CASES — PRIORITIZED
+## 4. USERS
 
-| Priority | Use Case | Data Module | Complexity |
-|----------|----------|-------------|------------|
-| P0 | Query individual employee records — join date, transfer history, current station | Staff Metadata | Low |
-| P0 | Query attendance and availability — who is on leave, when, what category | Attendance | Low |
-| P1 | Query performance rankings — top and bottom performers by team and period | Performance | Medium |
-| P1 | Query financial data — salary grades, underpaid employees, allowance eligibility | Financial | Medium |
-| P2 | Cross-module queries — combine attendance and performance for rotation decisions | Multi-module | High |
+**Primary user:** CEO and C-suite executives at One Network.
+
+**User profile:** Senior leaders managing a 5,000-person workforce. High-stakes decisions, low tolerance for delay, limited time, and no appetite for learning new interfaces. They communicate in natural language. They expect instant answers. They do not want to interact with filters, dropdowns, or search fields.
+
+**Secondary user:** HR Director and Department Heads who need to prepare briefings and verify data accuracy.
 
 ---
 
-## 6. SYSTEM ARCHITECTURE — PRODUCT DECISIONS
+## 5. USE CASES — PRIORITY ORDER
 
-This section documents the product decisions behind the architecture. Engineering implementation details are in the technical spec.
+These are the real questions the CEO will ask on Day 1. Each must work correctly before launch.
 
-**Decision 1: On-premises deployment only.**
-Rationale: HR and financial data is classified as sensitive. No data leaves the enterprise perimeter. Cloud APIs are not an option. All models run on local servers.
-
-**Decision 2: Dual data source architecture.**
-The system connects to two data sources: a structured SQL database covering attendance, performance, financial, and staff metadata; and a PDF document store covering HR policies, allowance rules, and employment terms. Both are required because some questions require structured data retrieval and some require policy context.
-
-**Decision 3: Query classification before retrieval.**
-A classification model routes each question to the correct data module before retrieval begins. This prevents cross-module confusion and reduces hallucination risk by narrowing the retrieval surface.
-
-**Decision 4: SQL generation for structured queries.**
-For structured data questions, the system generates a SQL query rather than relying solely on vector retrieval. This ensures factual accuracy on countable, recordable data — join dates, transfer counts, salary figures — where vector similarity is insufficient.
-
-**Decision 5: Llama 3.2 for generation.**
-Selected after benchmarking on the client's on-premises hardware. Chosen for performance within the hardware constraints, not for capability in isolation.
+| Priority | Question type | Example query |
+|----------|--------------|---------------|
+| P0 | Employee metadata lookup | "When did Ahmad join the company?" |
+| P0 | Transfer and movement history | "When was the last time Fatima was transferred from Lahore?" |
+| P0 | Attendance and availability | "Who is on leave this week in the operations team?" |
+| P1 | Performance ranking | "Who are the ten lowest performing employees in the HR department?" |
+| P1 | Performance history | "Who has been the best performer in finance over the past six months?" |
+| P1 | Compensation analysis | "Who in the engineering team is underpaid relative to their grade?" |
+| P2 | Leave planning | "Who has applied for leave next month and what category?" |
+| P2 | Headcount summary | "How many people are currently posted at the Lahore location?" |
 
 ---
 
-## 7. SUCCESS METRICS
+## 6. SUCCESS METRICS
 
-These are the acceptance criteria before launch. The product does not ship unless these thresholds are met.
+The product succeeds when the following thresholds are met and sustained for 30 days post-launch.
 
-| Metric | Threshold | Measurement Method |
-|--------|-----------|-------------------|
-| Golden set accuracy | 85% of 50 pre-defined questions answered correctly | Manual review against ground truth |
-| Response latency | Under 10 seconds for 90% of queries | Instrumented query logs |
-| Retrieval precision | Correct data module identified in 95% of queries | Classification model evaluation |
-| Source citation rate | 100% of answers include data source reference | Automated check |
-| Executive adoption | CEO and 3 senior executives using weekly within 30 days of launch | Usage logs |
+**Accuracy:** 90% of P0 and P1 queries return a factually correct answer verified against ground truth in the database. Measured using a 50-question golden dataset run weekly.
 
----
+**Retrieval correctness:** The right data source is retrieved for 95% of queries — meaning the classification model routes to the correct module and the SQL query or vector retrieval returns the relevant record.
 
-## 8. FAILURE MODES AND GUARDRAILS
+**Response latency:** End-to-end response time under 8 seconds for 95% of queries on the production hardware configuration.
 
-This section defines what happens when the product is wrong — and what prevents it from being confidently wrong.
+**Executive adoption:** CEO and at least three C-suite executives use the system for real HR queries at least twice per week within 30 days of launch — replacing at least one weekly Excel presentation cycle.
 
-**Failure Mode 1: Data quality failure**
-The database contains incomplete or incorrect records. Example: performance module stores only a single numeric score — insufficient to answer qualitative performance questions. The model retrieves correctly but the answer is useless.
-
-Guardrail: Pre-launch data audit across all four modules. 20 sample questions run against raw database before any model integration. Data gaps are fixed before the product is built, not after.
-
-**Failure Mode 2: Hallucination on leave categories**
-The model invents a leave category that does not exist in the database. Example: CEO asks about an employee's upcoming leave and the model returns a marriage leave with associated allowances — when no such leave has been applied for. The CEO makes a staffing decision based on false data.
-
-Guardrail: All leave-related answers must be sourced directly from the attendance database record. The model is instructed to return "no record found" if the data does not exist, rather than generating a plausible answer.
-
-**Failure Mode 3: Cross-module confusion**
-A question spanning multiple modules — such as "which employees have been underperforming and are also due for rotation" — triggers incorrect module classification and returns partial or mixed data.
-
-Guardrail: Multi-label classification is supported. Questions classified to multiple modules trigger parallel retrieval and explicit result merging before generation. Each result set is tagged with its source module in the response.
-
-**Failure Mode 4: Retrieval failure on policy documents**
-A question about HR policy — such as allowance eligibility for marriage leave — fails to retrieve the correct policy document because the PDF was poorly chunked or the embedding did not capture the right context.
-
-Guardrail: Policy documents are chunked by section, not by character count. Section headings are preserved as metadata and used in retrieval ranking.
+**Zero hallucination on identity queries:** P0 metadata queries — name, join date, grade, location — must return 100% accurate answers. A single hallucinated identity fact is a severity-1 incident.
 
 ---
 
-## 9. CONSTRAINTS
+## 7. CONSTRAINTS AND AI-SPECIFIC RISKS
 
-- All models and infrastructure run on-premises on client-owned hardware
-- No internet connectivity during inference
-- No third-party API calls of any kind
-- Data never leaves the enterprise perimeter
-- Access is restricted to authorized executives only — role-based access control enforced at the application layer
-- The system must operate without a dedicated ML engineer on-call post-launch
+This section is mandatory for any AI product PRD. It answers: what does failure look like and what do we do about it?
+
+**Constraint 1 — On-premises only.**
+The system runs entirely on One Network's internal servers. No data leaves the building. No cloud APIs. No internet connectivity during inference. All models, embeddings, and vector databases must be self-hosted. This is a hard constraint, not a preference.
+
+**Constraint 2 — Data quality dependency.**
+The system is only as accurate as the data in the HRMS database. HR staff must complete all 75 induction fields for every employee before the system can answer questions about that employee. Incomplete records produce incomplete answers. A data validation sprint must complete before the product launches.
+
+**Constraint 3 — Leave category hallucination risk.**
+The highest-risk failure mode is incorrect leave category attribution. If the model hallucinates a marriage leave record for an employee who is not getting married, the company may incorrectly trigger marriage allowance payments. This is a financial fraud risk. Mitigation: all leave category answers must cite the exact database record and display the source document reference alongside the answer. Any leave query without a verifiable source record must return "no record found" rather than an inferred answer.
+
+**Constraint 4 — Performance data thinness.**
+The current database stores performance as a single numeric score per review cycle. The system cannot answer qualitative performance questions — "is Ahmad a reliable leader?" — from this data alone. Questions exceeding the data's depth must return a clear "insufficient data to answer this question" response rather than an inferred answer.
+
+**Constraint 5 — Classification model failure.**
+When a query spans multiple modules — "show me employees who are underperforming and have had recent transfers" — the classification model may fail to route correctly. Multi-module queries must be flagged to the user as higher-uncertainty responses until the classification model is validated against a multi-label test set.
 
 ---
 
-## 10. RISKS AND OPEN QUESTIONS
+## 8. SYSTEM ARCHITECTURE OVERVIEW
+
+This section is for technical alignment only. Engineering owns the implementation.
+
+**Data sources:** SQL database covering four modules — attendance and availability, performance, financial data, staff metadata. PDF policy documents covering HR procedures and allowance rules.
+
+**Ingestion pipeline:** PDFs processed through OCR, chunked, embedded via Hugging Face embedding model, stored in Milvus vector database. SQL data accessed directly via query generation.
+
+**Query pipeline:** Natural language query enters classification model, routes to relevant module, generates SQL query or vector retrieval, passes results to Llama 3.2 for natural language response generation.
+
+**Infrastructure:** Fully on-premises. Zero cloud dependency. Runs on One Network's internal servers.
+
+---
+
+## 9. ACCEPTANCE CRITERIA — DEFINITION OF DONE
+
+The product is not ready to ship until every item below is verified.
+
+- 50-question golden dataset built and reviewed by CEO or HR Director
+- Golden dataset accuracy above 90% on P0 and P1 queries
+- Zero hallucinated answers on identity queries across 200 test runs
+- Leave category answers always display source record reference
+- "Insufficient data" response functioning correctly on out-of-scope queries
+- Response latency under 8 seconds on production hardware for 95% of queries
+- HR data completeness above 95% across all active employee records
+- CEO has completed one live demo session and confirmed the product answers real questions correctly
+
+---
+
+## 10. WHAT CAN GO WRONG — RISK REGISTER
 
 | Risk | Likelihood | Impact | Mitigation |
-|------|------------|--------|------------|
-| HR data is too incomplete to answer executive questions accurately | High | High | Pre-launch data audit; data completeness sprint before build begins |
-| Executive adoption fails if UX is too complex | Medium | High | User testing with actual CEO before full launch |
-| Performance module answers are qualitatively insufficient | High | Medium | Supplementary survey data collected during build phase |
-| Model performance degrades on client hardware vs development environment | Medium | High | All benchmarking done on client hardware, not development machines |
-| Scope creep — executives request write access or employee-facing features | High | Medium | Non-goals section is contractually referenced in acceptance criteria |
+|------|-----------|--------|------------|
+| HR data incomplete at launch | High | High | Data validation sprint mandatory before build begins |
+| Leave category hallucination causes incorrect payment | Medium | Critical | Source citation required on all leave answers |
+| Classification model misroutes multi-module queries | Medium | Medium | Flag multi-module queries as higher uncertainty |
+| Executive adoption fails due to interface complexity | Low | High | CEO demo session with real questions before launch |
+| Performance data too thin to answer qualitative questions | High | Medium | "Insufficient data" response for out-of-scope queries |
 
 ---
 
-## 11. DEFINITION OF DONE
+## 11. OPEN QUESTIONS
 
-Version 1 is complete when:
+These must be answered before build begins.
 
-1. All P0 and P1 use cases return accurate answers on the golden set at 85% or above
-2. Response latency is under 10 seconds for 90% of queries on client hardware
-3. Every answer includes a source citation
-4. The CEO has completed a live demo session and confirmed the product answers their real questions
-5. The system has run for 5 business days without a hallucinated answer that reached the CEO uncorrected
-6. A handover document exists so the system can be maintained without the original engineering team
+1. What is the minimum data completeness threshold required before launch? Who owns the data validation sprint?
+2. Which executive is the primary sponsor and will attend the weekly demo sessions during build?
+3. Is there an existing authentication layer for the HRMS system that the copilot interface should integrate with, or does access control need to be built from scratch?
+4. What is the hardware specification of the production server where the system will run? This determines which Llama variant is feasible.
+5. Are there any HR data fields that should never be surfaced through the copilot — for example, salary data for employees below a certain grade?
 
 ---
 
-## 12. WHAT I WOULD DO DIFFERENTLY TODAY
-
-This PRD was reconstructed from a product that was built without a formal discovery process. The following gaps were discovered post-launch and would be addressed pre-build if starting today:
-
-- A data richness audit would run before architecture decisions were made
-- A golden dataset of 50 real executive questions would be built before model selection
-- Performance module data would be supplemented with qualitative survey data before the feature was scoped
-- A paper prototype of the interface would be tested with the CEO before any engineering work began
-- Acceptance criteria would be contractually agreed before the first sprint
+*This PRD is a portfolio artifact produced as part of a Senior AI PM development program. It is based on a real product built at One Network, reconstructed with full product discovery rigor applied retroactively.*
