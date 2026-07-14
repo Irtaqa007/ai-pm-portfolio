@@ -47,7 +47,11 @@ Most AI PMs have never operated inside these constraints. I have shipped there f
 
 | # | Title | Platform | Date |
 |---|-------|----------|------|
-| 1 | A RAG system is only as good as its data | LinkedIn | Jul 2026 |
+| 1 | From air-gapped ML to AI product: what defense taught me about shipping AI that cannot fail | [LinkedIn Article](https://www.linkedin.com/pulse/from-air-gapped-ml-ai-product-what-defense-taught-me-shipping-naveed-iwdtf/) | Jul 2026 |
+| 2 | A RAG system is only as good as its data | LinkedIn Post | Jul 2026 |
+| 3 | The Fable 5 incident did not create the sovereign AI market | LinkedIn Post | Jul 2026 |
+| 4 | Most AI product teams build the features executives ask for first | LinkedIn Post | Jul 2026 |
+| 5 | Prioritization is not about which features matter most | LinkedIn Post | Jul 2026 |
 
 ---
 
